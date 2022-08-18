@@ -72,11 +72,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         numPages,
         currentPage: i + 1,
       },
-    })
-  })
-
-  Array.from({ length: numPages }).forEach((_, i) => {
-    createPage({
+    },
+    {
       path: i === 0 ? `/music` : `/blog/${i + 1}`,
       component: blogListMusic,
       context: {
@@ -85,8 +82,23 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         numPages,
         currentPage: i + 1,
       },
-    })
+    },
+
+    )
   })
+
+  // Array.from({ length: numPages }).forEach((_, i) => {
+  //   createPage({
+  //     path: i === 0 ? `/music` : `/blog/${i + 1}`,
+  //     component: blogListMusic,
+  //     context: {
+  //       limit: postsPerPage,
+  //       skip: i * postsPerPage,
+  //       numPages,
+  //       currentPage: i + 1,
+  //     },
+  //   })
+  // })
 }
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
