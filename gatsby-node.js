@@ -65,8 +65,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
      // path: i === 0 ? `/blog` : `/blog/${i + 1}`,
-     path:post.node.frontmatter.path,
-      component: post.node.frontmatter.template === 'blog' ? blogList : blogMusic,
+     path:node.frontmatter.path,
+      component: node.frontmatter.template === 'blog' ? blogList : blogMusic,
       context: {
         limit: postsPerPage,
         skip: i * postsPerPage,
