@@ -5,7 +5,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
   const blogList = path.resolve(`./src/templates/blog-list.js`)
-  const blogListMusic=path.resolve(`./src/templates/blog-list-music.js`)
 
   const result = await graphql(`
     {
@@ -64,41 +63,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
-      path: i === 0 ? `/blog` : `/blog/${i + 1}`,
-      component: blogList,
+     // path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+     path: post.node.frontmatter.slug,
+     component: path.resolve(
+      `src/templates/${String(post.node.frontmatter.template)}.js`
+    ),
+     // component: blogList,
       context: {
         limit: postsPerPage,
         skip: i * postsPerPage,
         numPages,
         currentPage: i + 1,
       },
-    },
-    {
-      path: i === 0 ? `/music` : `/blog/${i + 1}`,
-      component: blogListMusic,
-      context: {
-        limit: postsPerPage,
-        skip: i * postsPerPage,
-        numPages,
-        currentPage: i + 1,
-      },
-    },
-
-    )
+    })
   })
-
-  // Array.from({ length: numPages }).forEach((_, i) => {
-  //   createPage({
-  //     path: i === 0 ? `/music` : `/blog/${i + 1}`,
-  //     component: blogListMusic,
-  //     context: {
-  //       limit: postsPerPage,
-  //       skip: i * postsPerPage,
-  //       numPages,
-  //       currentPage: i + 1,
-  //     },
-  //   })
-  // })
 }
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
