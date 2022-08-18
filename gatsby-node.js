@@ -72,10 +72,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         currentPage: i + 1,
       },
     })
-
   })
-
-
 }
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
