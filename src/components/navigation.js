@@ -45,6 +45,7 @@ class Navigation extends React.Component {
   handleToggleClick() {
     this.setState(state => ({
       showMenu: !state.showMenu,
+      
     }))
   }
 
