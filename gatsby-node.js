@@ -64,7 +64,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
 
   posts.forEach((post, index) => {
-    if (post.node.frontmatter.slug === "/blog") {
+    if (post.node.frontmatter.slug === '/blog') {
       Array.from({ length: numPages }).forEach((_, i) => {
         createPage({
           path: i === 0 ? `/blog` : `/blog/${i + 1}`,
